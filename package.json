@@ -15,6 +15,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.12.10",
     "browserify": "^14.1.0",
+    "dotenv": "^4.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-less-sourcemap": "^1.4.3",
@@ -22,5 +23,13 @@
     "gulp-sourcemaps": "^2.4.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "algoliasearch": "^3.21.1",
+    "algoliasearch-helper": "^2.19.0",
+    "jquery": "^3.1.1",
+    "normalize-scss": "^6.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }

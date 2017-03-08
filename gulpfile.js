@@ -12,6 +12,14 @@ var concat = require('gulp-concat');
 
 var jsEntry = './src/js/main.js';
 
+var dependencies = [
+  'jquery',
+  'react',
+  'react-dom',
+  'algoliasearch',
+  'algoliasearch-helper'
+]
+
 // Static Server
 gulp.task('serve', function() {
     browserSync.init({
@@ -22,14 +30,15 @@ gulp.task('serve', function() {
 });
 
 // Watching scss/less/html files
-gulp.task('watch', ['serve', 'sass', 'js', 'js-vendor'], function() {
-    gulp.watch('./src/**/*.js', ['js']);
+gulp.task('watch', ['sass', 'js', 'serve'], function() {
+    gulp.watch('./src/js/**/*.js', ['js']);
     gulp.watch("./src/scss/**/*.scss", ['sass']);
     gulp.watch("*.html").on('change', browserSync.reload);
 });
 
-gulp.task('js', function () {
+gulp.task('js', ['js-vendor'], function () {
     return browserify(jsEntry, {debug: true, extensions: ['es6']})
+        .external(dependencies) // Specify all vendors as external source
         .transform(babelify, {presets: ["es2015", "react"]})
         .bundle()
         .pipe(source('bundle.js'))
@@ -41,9 +50,29 @@ gulp.task('js', function () {
 });
 
 gulp.task('js-vendor', function () {
-    return gulp.src("./src/vendor/**/*.js")
-      .pipe(concat('vendor.js'))
-      .pipe(gulp.dest("./build/"));
+
+    var b = browserify({
+        debug: true
+    });
+
+    dependencies.forEach(function(lib) {
+        b.require(lib);
+    });
+
+    return b.bundle()
+      .pipe(source('vendor.js'))
+      .pipe(buffer())
+      .pipe(gulp.dest('./build/'))
+      // .pipe(browserSync.stream({once: true}));
+
+    // return gulp.src("./src/vendor/**/*.js")
+    //   .pipe(concat('vendor.js'))
+    //   .pipe(gulp.dest("./build/"));
+});
+
+gulp.task('images', function(){
+  return gulp.src('./src/images/**/*.+(png|jpg|jpeg|gif|svg)')
+    .pipe(gulp.dest('build/images'))
 });
 
 // gulp.task('html', function(){
@@ -62,19 +91,8 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
-// Compile LESS into CSS & auto-inject into browsers
-// gulp.task('less', function() {
-//   return gulp.src("assets/less/*.less")
-//     .pipe(less({
-//       sourceMap: {
-//         sourceMapRootpath: './assets/less' // Optional absolute or relative path to your LESS files
-//       }
-//     }))
-//     .pipe(gulp.dest("assets/css"))
-//     .pipe(browserSync.stream());
-// });
 
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['images','watch']);
 gulp.task('server', ['serve']);
 gulp.task('dev', ['watch']);

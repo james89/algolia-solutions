@@ -1,14 +1,19 @@
+@import '../../node_modules/normalize-scss/sass/normalize';
+
 body {
+  background-image:
+     url(../images/background.png);
+  background-repeat: repeat;
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
 }
 
-.welcome-container {
-  margin: 50px 0 0 0;
-  text-align: center;
-  font-size: 2em;
 
-  p {
-    margin: 5px;
-  }
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    /* Retina-specific stuff here */
+    background-image:
+       url(../images/background_@2X.png);
 }
