@@ -6,8 +6,7 @@ Algolia import and csv conversion found in `./convert_csv_and_upload.js`
 
 Run this import script with:
 
-```npm run automagical-convert-upload
-```
+```npm run automagical-convert-upload```
 
 Admin API key is required for indexing. Requires private environment variable through node-env (`process.env.ADMIN_API_KEY`)
 
