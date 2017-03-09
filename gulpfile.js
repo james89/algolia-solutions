@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var babelify = require('babelify');
 var buffer = require('vinyl-buffer');
 var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
 
 
 var jsEntry = './src/js/main.js';
@@ -44,7 +45,8 @@ gulp.task('js', ['js-vendor'], function () {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(sourcemaps.write())
+          .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./build/'))
         .pipe(browserSync.reload({stream: true}));
 });
@@ -62,6 +64,7 @@ gulp.task('js-vendor', function () {
     return b.bundle()
       .pipe(source('vendor.js'))
       .pipe(buffer())
+      .pipe(uglify())
       .pipe(gulp.dest('./build/'))
       .pipe(browserSync.stream({once: true}));
 

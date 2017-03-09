@@ -11,6 +11,6 @@ Run this import script with:
 Admin API key is required for indexing. Requires private environment variable through node-env (`process.env.ADMIN_API_KEY`)
 
 ## App
-React/Gulp/ES6/Babel/SCSS
+React/Gulp/ES6/Babel/BrowserSync/SCSS
 
-Reconfigured the gulp tasks to support ES6 + Babel and a basic development and build process.
+Reconfigured the gulp tasks to support ES6 + Babel and a basic development and build process with source-mapping and browsersync.
