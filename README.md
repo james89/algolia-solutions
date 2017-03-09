@@ -14,3 +14,5 @@ Admin API key is required for indexing. Requires private environment variable th
 React/Gulp/ES6/Babel/BrowserSync/SCSS
 
 Reconfigured the gulp tasks to support ES6 + Babel and a basic development and build process with source-mapping and browsersync.
+
+![](http://i.giphy.com/1YbqghcGURhrq.gif)
