@@ -12,12 +12,22 @@
 
   <div id="root">
 
-    
+
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <!-- <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.11.2.min.js"><\/script>')</script> -->
+  <script>
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(location) {
+        console.log(location)
+      });
+    } else {
+        console.log("Geolocation is not supported");
+    }
+  </script>
   <script src="build/vendor.js"></script>
   <script src="build/bundle.js"></script>
+
   </body>
 </html>

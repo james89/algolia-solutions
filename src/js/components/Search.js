@@ -1,12 +1,12 @@
 import React from 'react';
-import AlgoliaSearch from 'algoliasearch';
-import AlgoliaSearchHelper from 'algoliasearch-helper';
-import Algolia from './Algolia.js';
+import { Input } from 'semantic-ui-react';
 
 const Search = React.createClass({
   render(){
     return (
-      <input></input>
+      <div className='search-bar'>
+        <Input onChange={this.props.handleSearch} fluid icon='search' placeholder='Search for Restaurants by Name, Cuisine, Location' />
+      </div>
     )
   }
 })

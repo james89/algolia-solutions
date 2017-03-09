@@ -1,14 +1,19 @@
 @import '../../node_modules/normalize-scss/sass/normalize';
+@import '../../node_modules/semantic-ui-css/semantic.css';
+
+// custom component styles
+@import 'semantic';
+@import 'searchbar';
+@import 'restaurant';
+@import 'sidebar';
 
 body {
   background-image:
      url(../images/background.png);
   background-repeat: repeat;
   font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
 }
-
-
 
 @media
 (-webkit-min-device-pixel-ratio: 2),
@@ -16,4 +21,15 @@ body {
     /* Retina-specific stuff here */
     background-image:
        url(../images/background_@2X.png);
+}
+
+.ui.container {
+  background-color: #fff;
+
+}
+
+@media only screen and (min-width: 768px){
+  .ui.container {
+    margin-top: 30px;
+  }
 }

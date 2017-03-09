@@ -1,0 +1,43 @@
+.ui.disabled.rating .active.icon {
+ color: #ffab66;
+}
+
+.restaurant-item span.restaurant-score {
+  color: #ffab66;
+  font-weight: bolder;
+}
+.restaurant-item span, .ui.list > .restaurant-item.item .description {
+  color: #707070;
+  font-style: 'Helvetica Neue', sans-serif;
+}
+.ui.list > .restaurant-item.item .header {
+  font-size: 16px;
+}
+
+.restaurant-list .ui.basic.grey.button {
+  width: 180px;
+  margin: 0 auto;
+  display: block;
+}
+
+.results-count {
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.results-info {
+  position: absolute;
+  top: 30px;
+  width: 270px;
+  background: #fff;
+}
+
+.restaurant-list {
+  .item.restaurant-item {
+    margin: 15px 0;
+  }
+}
+
+.ui.divider {
+  margin: 2rem 2rem;
+}

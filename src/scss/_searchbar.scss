@@ -1,0 +1,17 @@
+.search-bar {
+  height: 83px;
+  display: flex;
+  background-color: #1C688E;
+
+  .ui.fluid.input {
+    align-content: center;
+    align-items: center;
+    flex: 1 0 auto;
+    margin: 0 2em;
+    font-size: 1.2em;
+  }
+
+  input {
+    height: 40px;
+  }
+}

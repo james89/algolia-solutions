@@ -63,7 +63,7 @@ gulp.task('js-vendor', function () {
       .pipe(source('vendor.js'))
       .pipe(buffer())
       .pipe(gulp.dest('./build/'))
-      // .pipe(browserSync.stream({once: true}));
+      .pipe(browserSync.stream({once: true}));
 
     // return gulp.src("./src/vendor/**/*.js")
     //   .pipe(concat('vendor.js'))

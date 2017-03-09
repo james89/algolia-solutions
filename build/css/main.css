@@ -1,12 +1,99 @@
-/* line 3, /Users/jrothpearl/Downloads/algolia/src/scss/main.scss */
+@import url(../../node_modules/semantic-ui-css/semantic.css);
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+  /* line 2, /Users/jrothpearl/Downloads/algolia/src/scss/_semantic.scss */
+  .ui.container {
+    width: 820px; } }
+
+/* line 1, /Users/jrothpearl/Downloads/algolia/src/scss/_searchbar.scss */
+.search-bar {
+  height: 83px;
+  display: flex;
+  background-color: #1C688E; }
+  /* line 6, /Users/jrothpearl/Downloads/algolia/src/scss/_searchbar.scss */
+  .search-bar .ui.fluid.input {
+    align-content: center;
+    align-items: center;
+    flex: 1 0 auto;
+    margin: 0 2em;
+    font-size: 1.2em; }
+  /* line 14, /Users/jrothpearl/Downloads/algolia/src/scss/_searchbar.scss */
+  .search-bar input {
+    height: 40px; }
+
+/* line 1, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.ui.disabled.rating .active.icon {
+  color: #ffab66; }
+
+/* line 5, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.restaurant-item span.restaurant-score {
+  color: #ffab66;
+  font-weight: bolder; }
+
+/* line 9, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.restaurant-item span, .ui.list > .restaurant-item.item .description {
+  color: #707070;
+  font-style: 'Helvetica Neue', sans-serif; }
+
+/* line 13, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.ui.list > .restaurant-item.item .header {
+  font-size: 16px; }
+
+/* line 17, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.restaurant-list .ui.basic.grey.button {
+  width: 180px;
+  margin: 0 auto;
+  display: block; }
+
+/* line 23, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.results-count {
+  font-size: 14px;
+  font-weight: bolder; }
+
+/* line 28, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.results-info {
+  position: absolute;
+  top: 30px;
+  width: 270px;
+  background: #fff; }
+
+/* line 36, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.restaurant-list .item.restaurant-item {
+  margin: 15px 0; }
+
+/* line 41, /Users/jrothpearl/Downloads/algolia/src/scss/_restaurant.scss */
+.ui.divider {
+  margin: 2rem 2rem; }
+
+/* line 1, /Users/jrothpearl/Downloads/algolia/src/scss/_sidebar.scss */
+.ui.text.menu .header.item {
+  text-transform: none;
+  font-size: 14px;
+  font-weight: bolder; }
+
+/* line 7, /Users/jrothpearl/Downloads/algolia/src/scss/_sidebar.scss */
+.five.wide.column > div {
+  margin: 0 auto !important;
+  width: 250px;
+  padding-top: 20px; }
+
+/* line 10, /Users/jrothpearl/Downloads/algolia/src/scss/main.scss */
 body {
   background-image: url(../images/background.png);
   background-repeat: repeat;
   font-family: 'Open Sans', sans-serif;
-  font-size: 13px; }
+  font-size: 14px; }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
   background-image: url(../images/background_@2X.png); }
+
+/* line 26, /Users/jrothpearl/Downloads/algolia/src/scss/main.scss */
+.ui.container {
+  background-color: #fff; }
+
+@media only screen and (min-width: 768px) {
+  /* line 32, /Users/jrothpearl/Downloads/algolia/src/scss/main.scss */
+  .ui.container {
+    margin-top: 30px; } }
 
 /*# sourceMappingURL=../../scss */
