@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "dev": "gulp dev",
-    "server": "gulp server"
+    "server": "gulp server",
+    "automagical-convert-upload": "node convert_csv_and_upload.js"
   },
   "author": "Algolia",
   "license": "Algolia",
