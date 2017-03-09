@@ -8,7 +8,7 @@ import update from 'immutability-helper';
 import RatingFilter from './Sidebar/RatingFilter.js';
 import PaymentFilter from './Sidebar/PaymentFilter.js';
 
-
+let geoLoc = window.userLocation || null;
 
 /*
 Container component to handle state
@@ -56,9 +56,16 @@ const App = React.createClass({
   },
 
   componentDidMount(){
+    if(geoLoc){
 
+          let geoLatLong = geoLoc.coords.lat.toString() + ',' + geoLoc.coords.long.toString();
+          helper.setQueryParameter('aroundLatLng', geoLatLong).search();
 
-    helper.setQuery('').search();
+    } else {
+      helper.setQuery('').search();
+
+    }
+
     // initial search on page load, set page number for later use
     helper.on('result', (data) => {
       console.log(data)
