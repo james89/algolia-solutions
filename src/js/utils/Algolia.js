@@ -16,7 +16,9 @@ helper and utility methods
 */
 export const helper = AlgoliaSearchHelper(client, indexDb, {
   hitsPerPage: 3,
-  facets: ['food_type', 'stars_count', 'payment_options']
+  facets: ['food_type', 'payment_options'],
+  disjunctiveFacets: ['stars_count'],
+  maxValuesPerFacet: 7
 });
 
 // 403 forbidden?

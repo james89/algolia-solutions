@@ -48,3 +48,10 @@ index.addObjects(nativeMerge, function(err, content) {
     console.log(content)
   }
 });
+
+//settings
+index.setSettings({
+  'searchableAttributes': ['name', 'food_type', 'neighborhood', 'area', 'city'],
+  'attributesForFaceting': ['food_type', 'stars_count', 'payment_options'],
+  'customRanking': ['geo']
+})

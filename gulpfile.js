@@ -10,7 +10,6 @@ var buffer = require('vinyl-buffer');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-
 var jsEntry = './src/js/main.js';
 
 var dependencies = [
@@ -34,10 +33,10 @@ gulp.task('serve', function() {
 gulp.task('watch', ['sass', 'js', 'serve'], function() {
     gulp.watch('./src/js/**/*.js', ['js']);
     gulp.watch("./src/scss/**/*.scss", ['sass']);
-    gulp.watch("*.html").on('change', browserSync.reload);
+    // gulp.watch("*.html").on('change', browserSync.reload);
 });
 
-gulp.task('js', ['js-vendor'], function () {
+gulp.task('js', function () {
     return browserify(jsEntry, {debug: true, extensions: ['es6']})
         .external(dependencies) // Specify all vendors as external source
         .transform(babelify, {presets: ["es2015", "react"]})
@@ -68,9 +67,6 @@ gulp.task('js-vendor', function () {
       .pipe(gulp.dest('./build/'))
       .pipe(browserSync.stream({once: true}));
 
-    // return gulp.src("./src/vendor/**/*.js")
-    //   .pipe(concat('vendor.js'))
-    //   .pipe(gulp.dest("./build/"));
 });
 
 gulp.task('images', function(){
@@ -91,9 +87,8 @@ gulp.task('sass', function() {
       sourceMap: 'scss'
     }))
     .pipe(gulp.dest("./build/css"))
-    .pipe(browserSync.stream());
+    // .pipe(browserSync.stream());
 });
-
 
 
 gulp.task('default', ['images','watch']);

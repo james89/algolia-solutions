@@ -14,6 +14,7 @@ let geoLoc = window.userLocation || null;
 Container component to handle state
 */
 
+
 const App = React.createClass({
 
   getInitialState() {
@@ -27,12 +28,6 @@ const App = React.createClass({
   handleSearch(event){
     let query = event.target.value;
     helper.setQuery(query).search();
-    // // helper.on('result', (data) => {
-    // //   this.setState({
-    // //     searchTerm: event.target.value
-    // //     results: data.hits
-    // //   })
-    // })
 
   },
 
@@ -44,15 +39,22 @@ const App = React.createClass({
 
     helper.setPage(page).search();
     helper.on('result', (data) => {
-      console.log(data)
       this.setState({
         page: data.page + 1,
         results: update(results, {$push: data.hits}),
         resultCt: data.nbHits,
-        processingTime: data.processingTimeMS
+        processingTime: data.processingTimeMS,
+        data: data
       })
     })
 
+
+
+
+  },
+
+  renderFacets(type){
+    this.state.results.getFacetValues(type, {sortBy: ['count:desc', 'selected']})
   },
 
   componentDidMount(){
@@ -66,27 +68,33 @@ const App = React.createClass({
 
     }
 
+    var that = this;
     // initial search on page load, set page number for later use
     helper.on('result', (data) => {
-      console.log(data)
+      console.log('data', data)
       this.setState({
         page: 1,
         results: data.hits,
         resultCt: data.nbHits,
-        processingTime: data.processingTimeMS
+        processingTime: data.processingTimeMS,
+        data: data
       })
+
+      console.log(this.state.data.getFacetValues('food_type'))
     });
 
 
   },
 
   render(){
+
     return (
       <Container>
+
         <Search handleSearch={this.handleSearch} />
         <Grid divided>
           <Grid.Column width={5} only='computer'>
-            <Cuisines />
+            <Cuisines renderFacets={this.renderFacets} />
             <RatingFilter />
             <PaymentFilter />
           </Grid.Column>

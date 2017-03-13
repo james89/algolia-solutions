@@ -15,13 +15,11 @@ const Restaurant = (props) => {
         <span className="restaurant-score">{props.stars_count}</span> <Rating defaultRating={rating} maxRating={5} disabled /> <span>({props.reviews_count} reviews)</span>
         <List.Description>{props.food_type} | {props.neighborhood} | {props.price_range}</List.Description>
       </List.Content>
-
     </List.Item>
   )
 }
 
 const ResultsList = (props) => {
-
 
   return (
 
