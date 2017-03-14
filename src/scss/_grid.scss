@@ -1,0 +1,14 @@
+.ui.grid {
+  padding-top: 1rem;
+}
+
+  .hide-overflow {
+    max-height: 460px !important;
+    overflow: hidden;
+  }
+
+  .show-overflow {
+    max-height: none;
+    overflow: inherit;
+  }
+

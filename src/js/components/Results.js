@@ -26,7 +26,7 @@ const ResultsList = (props) => {
     <List className="restaurant-list">
 
       <Divider />
-      <div className="results-info"><span className="results-count">{props.count} results found</span> in .00{props.time} seconds</div>
+      <div className="results-info"><span className="results-count">{props.count} results found</span> in {props.time / 1000} seconds</div>
       { props.results.map((result, i) => (
 
         <Restaurant  {...result} key={i} image={result.image_url} />

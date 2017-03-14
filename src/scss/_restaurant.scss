@@ -34,10 +34,14 @@
 
 .restaurant-list {
   .item.restaurant-item {
-    margin: 15px 0;
+    margin: 20px 0;
   }
 }
 
 .ui.divider {
   margin: 2rem 2rem;
+}
+
+.ui.list .list > .item > img.image + .content, .ui.list > .item > img.image + .content {
+  line-height: 1.8em;
 }

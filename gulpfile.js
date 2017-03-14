@@ -44,7 +44,7 @@ gulp.task('js', function () {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-          .pipe(uglify())
+          .pipe(uglify({mangle: false}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./build/'))
         .pipe(browserSync.reload({stream: true}));
@@ -63,7 +63,7 @@ gulp.task('js-vendor', function () {
     return b.bundle()
       .pipe(source('vendor.js'))
       .pipe(buffer())
-      .pipe(uglify())
+      .pipe(uglify({mangle: false}))
       .pipe(gulp.dest('./build/'))
       .pipe(browserSync.stream({once: true}));
 

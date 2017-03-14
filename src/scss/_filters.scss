@@ -1,0 +1,22 @@
+.filter-bar {
+  
+  font-family: 'Open Sans', sans-serif;
+  
+  .filter {
+    margin: 20px auto !important;
+  }
+
+  .filter {
+    max-width: 210px;
+  }
+
+  .filter.ui.vertical.text.menu .item, 
+  .filter .ui.rating {
+    padding: 2px 5px;
+  }
+
+  div.header.item {
+    padding: 0px 5px;
+  }
+
+}

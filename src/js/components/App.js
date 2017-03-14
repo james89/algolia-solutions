@@ -21,40 +21,59 @@ const App = React.createClass({
     return {
       searchTerm: '',
       results: [],
-      page: null
+      data: [],
+      foodTypes: [],
+      page: null,
+      activeCuisine: null,
+      activePaymentItem: null
     }
   },
 
   handleSearch(event){
     let query = event.target.value;
-    helper.setQuery(query).search();
+    // clear any refinements that may be active, and reset the hitsPerPage back to default
+    helper.clearRefinements().setQueryParameter('hitsPerPage', 3).setQuery(query).search();
 
   },
 
   handleShowMore(){
-    let page = this.state.page;
-    let results = this.state.results;
-
-    console.log('page', page)
-
-    helper.setPage(page).search();
-    helper.on('result', (data) => {
-      this.setState({
-        page: data.page + 1,
-        results: update(results, {$push: data.hits}),
-        resultCt: data.nbHits,
-        processingTime: data.processingTimeMS,
-        data: data
-      })
-    })
-
-
-
-
+    let totalHits = this.state.data.hitsPerPage;
+    helper.setQueryParameter('hitsPerPage', totalHits + 3).search()
   },
 
-  renderFacets(type){
-    this.state.results.getFacetValues(type, {sortBy: ['count:desc', 'selected']})
+  handleFilterClick(val, facet){
+    //handle active style for food facets
+    if(facet === 'food_type'){
+      var isCuisineActive = this.state.activeCuisine === val ? null : val;
+      console.log(isCuisineActive)
+      this.setState({activeCuisine: isCuisineActive})
+    } else {
+      this.setState({activeCuisine: null})
+    }
+
+
+    // } else {
+    //   this.setState({activePaymentItem: activePaymentItem})
+    // }
+
+    //always toggle the facet regardless of type
+    helper.setQueryParameter('hitsPerPage', 3).toggleFacetRefinement(facet, val).search()
+    
+  },
+
+  handlePaymentClick(val, facet){
+      //handle payment options
+      // var isPaymentActive = helper.hasRefinements('payment_options');
+      // this.setState({activePaymentItem: isPaymentActive ? null : val})
+      if(facet === 'payment_options'){
+
+        var isPaymentActive = this.state.activePaymentItem === val ? null : val;
+        this.setState({activePaymentItem: isPaymentActive})
+      } else {
+        this.setState({activePaymentItem: null})
+      }
+      
+      helper.setQueryParameter('hitsPerPage', 3).toggleFacetRefinement(facet, val).search()
   },
 
   componentDidMount(){
@@ -68,7 +87,6 @@ const App = React.createClass({
 
     }
 
-    var that = this;
     // initial search on page load, set page number for later use
     helper.on('result', (data) => {
       console.log('data', data)
@@ -80,7 +98,7 @@ const App = React.createClass({
         data: data
       })
 
-      console.log(this.state.data.getFacetValues('food_type'))
+      // console.log(this.state.data.getFacetValues('food_type'))
     });
 
 
@@ -88,17 +106,19 @@ const App = React.createClass({
 
   render(){
 
+    let currentHitsPerPage = helper.getQueryParameter('hitsPerPage');
+
     return (
       <Container>
 
         <Search handleSearch={this.handleSearch} />
-        <Grid divided>
-          <Grid.Column width={5} only='computer'>
-            <Cuisines renderFacets={this.renderFacets} />
+        <Grid divided className={ currentHitsPerPage === 3 ? 'hide-overflow' : 'show-overflow'}>
+          <Grid.Column width={4} only='computer' className="filter-bar">
+            <Cuisines handleFilterClick={this.handleFilterClick} activeCuisine={this.state.activeCuisine} data={this.state.data} />
             <RatingFilter />
-            <PaymentFilter />
+            <PaymentFilter handlePaymentClick={this.handlePaymentClick} activePaymentItem={this.state.activePaymentItem} data={this.state.data}/>
           </Grid.Column>
-          <Grid.Column computer={11} tablet={11} mobile={16}>
+          <Grid.Column computer={12} tablet={12} mobile={16}>
             <ResultsList
               count={this.state.resultCt}
               time={this.state.processingTime}

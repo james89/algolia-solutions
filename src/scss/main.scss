@@ -6,6 +6,9 @@
 @import 'searchbar';
 @import 'restaurant';
 @import 'sidebar';
+@import 'grid';
+@import 'filters';
+@import 'ratings';
 
 body {
   background-image:
@@ -13,6 +16,10 @@ body {
   background-repeat: repeat;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
+}
+
+*:focus {
+    outline: none;
 }
 
 @media
