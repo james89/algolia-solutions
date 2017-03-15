@@ -25,7 +25,8 @@ const App = React.createClass({
       foodTypes: [],
       page: null,
       activeCuisine: null,
-      activePaymentItem: null
+      activePaymentItem: null,
+      ratings: {'1': false, '2': false, '3': false, '4': false, '5': false}
     }
   },
 
@@ -45,20 +46,62 @@ const App = React.createClass({
     //handle active style for food facets
     if(facet === 'food_type'){
       var isCuisineActive = this.state.activeCuisine === val ? null : val;
-      console.log(isCuisineActive)
       this.setState({activeCuisine: isCuisineActive})
     } else {
       this.setState({activeCuisine: null})
     }
 
-
-    // } else {
-    //   this.setState({activePaymentItem: activePaymentItem})
-    // }
-
     //always toggle the facet regardless of type
     helper.setQueryParameter('hitsPerPage', 3).toggleFacetRefinement(facet, val).search()
     
+  },
+
+  handleRatingToggle(key){
+    console.log(key)
+    var newVal = !this.state.ratings[key]
+    var ratingNum = key;
+    var oldKeyArr = Object.values(this.state.ratings);
+    //if there are already active ratings, lets group them for a disjunctive numeric search (helper doesn't support OR for same facet numeric ranges)
+    if(oldKeyArr.includes(true) && newVal === true){
+      helper.clearRefinements('stars_count');
+      var lowerBound = oldKeyArr.indexOf(true) + 1;
+      helper.addNumericRefinement('stars_count', '>=', Math.min(lowerBound, Number(ratingNum)) );
+      helper.addNumericRefinement('stars_count', '<', Math.max(lowerBound, Number(ratingNum)) );
+
+    } else if (!oldKeyArr.includes(true) && newVal === true) {
+      helper.clearRefinements('stars_count');
+
+      helper.addNumericRefinement('stars_count', '>=', Number(ratingNum));
+      helper.addNumericRefinement('stars_count', '<', Number(ratingNum) + 1);
+    } else {
+       helper.removeNumericRefinement('stars_count', '>=', Number(ratingNum));
+       helper.removeNumericRefinement('stars_count', '<', Number(ratingNum) + 1);
+            helper.clearRefinements('stars_count');
+
+    }
+
+    helper.search();
+
+     this.setState((previousState) => update(previousState, {ratings: {[ratingNum]: {$set: newVal}} }));
+    // this.setState((previousState) => update(previousState, {ratings: {[ratingNum]: {$set: newVal}} }), () =>{
+    //   //create numeric filter for particular rating (if checked). 
+      
+    //   if(newVal === true){
+        
+    //     // if(Object.values(this.state.ratings).includes(true)){
+          
+    //     } else {
+    //       helper.addNumericRefinement('stars_count', '>=', Number(ratingNum));
+    //       helper.addNumericRefinement('stars_count', '<', Number(ratingNum) + 1);
+    //     }
+        
+    //   } else {
+    //     helper.removeNumericRefinement('stars_count', '>=', Number(ratingNum));
+    //     helper.removeNumericRefinement('stars_count', '<', Number(ratingNum) + 1);
+    //   }
+    //   helper.search();
+    //   console.log(helper.get)
+    // });
   },
 
   handlePaymentClick(val, facet){
@@ -83,7 +126,7 @@ const App = React.createClass({
           helper.setQueryParameter('aroundLatLng', geoLatLong).search();
 
     } else {
-      helper.setQuery('').search();
+      helper.setQueryParameter('aroundLatLngViaIP', true).search();
 
     }
 
@@ -97,8 +140,6 @@ const App = React.createClass({
         processingTime: data.processingTimeMS,
         data: data
       })
-
-      // console.log(this.state.data.getFacetValues('food_type'))
     });
 
 
@@ -115,7 +156,7 @@ const App = React.createClass({
         <Grid divided className={ currentHitsPerPage === 3 ? 'hide-overflow' : 'show-overflow'}>
           <Grid.Column width={4} only='computer' className="filter-bar">
             <Cuisines handleFilterClick={this.handleFilterClick} activeCuisine={this.state.activeCuisine} data={this.state.data} />
-            <RatingFilter />
+            <RatingFilter ratingObj={this.state.ratings} handleRatingToggle={this.handleRatingToggle} data={this.state.data}/>
             <PaymentFilter handlePaymentClick={this.handlePaymentClick} activePaymentItem={this.state.activePaymentItem} data={this.state.data}/>
           </Grid.Column>
           <Grid.Column computer={12} tablet={12} mobile={16}>
@@ -124,6 +165,7 @@ const App = React.createClass({
               time={this.state.processingTime}
               handleShowMore={this.handleShowMore}
               results={this.state.results}
+              data={this.state.data}
               />
           </Grid.Column>
         </Grid>

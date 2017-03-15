@@ -14,7 +14,7 @@ var jsEntry = './src/js/main.js';
 
 var dependencies = [
   'jquery',
-  'react',
+  'react.min.js',
   'react-dom',
   'algoliasearch',
   'algoliasearch-helper'

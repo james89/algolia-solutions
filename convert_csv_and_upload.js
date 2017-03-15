@@ -19,7 +19,7 @@ var dataObj = data.splice(1).map(function(el, idx){
     return {
       objectID: parseInt(el[0]),
       food_type: el[1],
-      stars_count: el[2],
+      stars_count: Number(el[2]),
       reviews_count: el[3],
       neighborhood: el[4],
       phone_number: el[5],

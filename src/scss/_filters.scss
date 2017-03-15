@@ -10,6 +10,10 @@
     max-width: 210px;
   }
 
+  .filter > div {
+    margin: 5px auto;
+  }
+
   .filter.ui.vertical.text.menu .item, 
   .filter .ui.rating {
     padding: 2px 5px;
@@ -17,6 +21,25 @@
 
   div.header.item {
     padding: 0px 5px;
+  }
+
+  .ui.checkbox {
+    min-height: 15px;
+    line-height: 15px;
+    min-width: 15px;
+  }
+
+  .ui.checkbox .box:before, .ui.checkbox label:before {
+    width: 15px;
+    height: 15px;
+  }
+  .ui.checkbox .box:after, .ui.checkbox label:after {
+    width: 15px;
+    height: 15px;
+  }
+
+  .ui.checkbox input:checked ~ .box:after, .ui.checkbox input:checked ~ label:after {
+    color: #2897C5;
   }
 
 }

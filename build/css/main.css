@@ -123,12 +123,31 @@
   .filter-bar .filter {
     max-width: 210px; }
   /* line 13, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
+  .filter-bar .filter > div {
+    margin: 5px auto; }
+  /* line 17, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
   .filter-bar .filter.ui.vertical.text.menu .item,
   .filter-bar .filter .ui.rating {
     padding: 2px 5px; }
-  /* line 18, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
+  /* line 22, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
   .filter-bar div.header.item {
     padding: 0px 5px; }
+  /* line 26, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
+  .filter-bar .ui.checkbox {
+    min-height: 15px;
+    line-height: 15px;
+    min-width: 15px; }
+  /* line 32, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
+  .filter-bar .ui.checkbox .box:before, .filter-bar .ui.checkbox label:before {
+    width: 15px;
+    height: 15px; }
+  /* line 36, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
+  .filter-bar .ui.checkbox .box:after, .filter-bar .ui.checkbox label:after {
+    width: 15px;
+    height: 15px; }
+  /* line 41, /Users/jrothpearl/Downloads/algolia/src/scss/_filters.scss */
+  .filter-bar .ui.checkbox input:checked ~ .box:after, .filter-bar .ui.checkbox input:checked ~ label:after {
+    color: #2897C5; }
 
 /* line 1, /Users/jrothpearl/Downloads/algolia/src/scss/_ratings.scss */
 .ui.rating .icon {
